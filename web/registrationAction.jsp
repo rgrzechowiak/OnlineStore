@@ -23,7 +23,7 @@
       out.println(sql+"<br>");
     %>
     <h2>
-        Thank you <%= name %>. An email has been sent to <%= email %>.
+        Thank's <%= name %>. An email has been sent to <%= email %>.
     </h2>
   </body>
 </html>
