@@ -5,6 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.io.*, java.util.*, java.sql.*"%>
+<%@page import="javax.servlet.http.*, javax.servlet.*"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -40,7 +44,7 @@
                 transform: translate(-50%, -50%)
             }
             
-            .button {
+            .Price_Button {
                 background-color: greenyellow;
                 margin: 0 auto;
                 margin-bottom: 10px;
@@ -50,10 +54,55 @@
                 text-align: center;
                 text-decoration: none;
             }
+            
+            .Remove_Button {
+                background-color: greenyellow;
+                margin: 0 auto;
+                margin-bottom: 10px;
+                border: none;
+                border-radius: 8px;
+                color: darkviolet;
+                text-align: center;
+                text-decoration: none; 
+            }
+            
+            .button {
+                background-color: greenyellow;
+                margin: 0 auto;
+                margin-bottom: 10px;
+                border: none;
+                border-radius: 8px;
+                color: darkviolet;
+                text-align: center;
+                text-decoration: none;
+                
+                
+            }
         </style>
         <title>JSP Page</title>
     </head>
     <body>
+    <%
+        String driverName = "com.mysql.jdbc.Driver";
+        String connectionUrl = "jdbc:mysql://localhost:3306/";
+        String dbName = "test";
+        String userID = "root";
+        String password = "";
+        
+        try{
+            Class.forName(driverName);
+        }
+        catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        
+
+    %>    
+    
         <div class="catmain">
             <div class="head">
                 <h1><center>Company Product Catalog</center></h1>
@@ -70,13 +119,31 @@
                             <th>Price Per Unit</th>
                             <th>Add to Store</th>
                         </tr>
+                        
+        <%
+            try{
+            connection = DriverManager.getConnection(connectionUrl+dbName, userID, password);
+            statement=connection.createStatement();
+            String sql = "SELECT * FROM product";
+            
+            resultSet = statement.executeQuery(sql);
+            while(resultSet.next()){
+        %>
                         <tr>
-                            <td><center><img src="images/xboxone.jpg" alt="Xbox One" style="width:200px; height:150px;"></center></td>
-                            <td><center>Xbox One</center></td>
-                            <td><center>8/10/2016</center></td>
-                            <td><center>$499.99</center></td>
-                            <td><center><button class="button">Add</button></center></td>
+                            <td><center><img src="<%=resultSet.getString("picture") %>" alt="" style="width:200px; height:150px;"></center></td>
+                            <td><center><%=resultSet.getString("name") %></center></td>
+                            <td><center>$<%=resultSet.getString("price") %></center></td>
+                            <td><center>New Price: <input type="text" name="NewPrice" value="$ Change Price"><button class="Price_Button">Confirm</button></center></td>
+                            <td><center><%=resultSet.getString("amountInStock")%></center></td>
+                            <td><center><form name="add" method="post" action="add.jsp"><input type="checkbox" name="check<%= resultSet.getString("productID")%>" value=<%= resultSet.getString("productID") %>><input type="submit" class="Remove_Button" value="Add"></center></td>
                         </tr>
+                        <%
+                            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            //branch test 2
+        }
+                        %>
                     </table>
                 </div>
         </div>
