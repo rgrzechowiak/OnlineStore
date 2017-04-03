@@ -151,7 +151,7 @@
                  <td><center>$<%=resultSet.getString("price") %></center></td>
                  <td><center>New Price: <input type="text" name="NewPrice" value="$ Change Price"><button class="Price_Button">Confirm</button></center></td>
                  <td><center><%=resultSet.getString("amountInStore")%></center></td>
-                 <td><center><button class="Remove_Button">Remove</button></center></td>
+        <td><center><form name="removal" method="post" action="delete.jsp"><input type="checkbox" name="check<%= resultSet.getString("productID")%>" value=<%= resultSet.getString("productID") %>><input type="submit" class="Remove_Button" value="Remove"></center></td>
              </tr>
         <%
         }
