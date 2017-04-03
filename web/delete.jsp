@@ -32,7 +32,7 @@ try{
     statement = connect.createStatement();
     for(int a=0;a<10;a++)
     {
-        statement.executeUpdate("DELETE FROM products WHERE productID='"+id[a]+"'");
+        statement.executeUpdate("DELETE FROM product WHERE productID='"+id[a]+"'");
     }
 }
 catch(SQLException e){
