@@ -8,19 +8,14 @@
 <%@page import="java.sql.*" %>
 <!DOCTYPE html>
 
-<% String id[]= new String[10];
+<%
 
         String driverName = "com.mysql.jdbc.Driver";
         String connectionUrl = "jdbc:mysql://localhost:3306/";
         String dbName = "test";
         String userID = "root";
         String password = "";
-        
-
-for(int i=0;i<10;i++)
-{
-  id[i]=request.getParameter("check"+i);
-}
+        String row = "";
 
 try{
     Connection connect = null;
@@ -30,10 +25,13 @@ try{
     ResultSet resultSet = null;
     Statement statement = null;
     statement = connect.createStatement();
-    for(int a=0;a<10;a++)
-    {
-        statement.executeUpdate("DELETE FROM product WHERE productID='"+id[a]+"'");
-    }
+    
+    row = request.getParameter("button");
+    
+    String sql2 = "DELETE FROM `product` WHERE `product`.`productID` = "+row; //only deletes the first row
+    
+    statement.executeUpdate(sql2);
+
 }
 catch(SQLException e){
     

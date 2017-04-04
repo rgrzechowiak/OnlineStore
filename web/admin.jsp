@@ -143,6 +143,7 @@
             String sql = "SELECT * FROM product";
             
             resultSet = statement.executeQuery(sql);
+            int i = 0;
             while(resultSet.next()){
         %>
              <tr>
@@ -151,9 +152,10 @@
                  <td><center>$<%=resultSet.getString("price") %></center></td>
                  <td><center>New Price: <input type="text" name="NewPrice" value="$ Change Price"><button class="Price_Button">Confirm</button></center></td>
                  <td><center><%=resultSet.getString("amountInStock")%></center></td>
-                 <td><center><form name="removal" method="post" action="delete.jsp"><input type="checkbox" name="check<%= resultSet.getString("productID")%>" value=<%= resultSet.getString("productID") %>><input type="submit" class="Remove_Button" value="Remove"></center></td>
+                 <td><center><form name="removal" method="post" action="delete.jsp"><button type="submit" name="button" class="Remove_Button" value=<%=resultSet.getString("productID")%>>Remove</button></form></center></td>
              </tr>
         <%
+            i++;
         }
 
         } catch (Exception e) {

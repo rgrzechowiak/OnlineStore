@@ -115,34 +115,35 @@
                         <tr>
                             <th>Product Image</th>
                             <th>Product Name</th>
-                            <th>Release Date</th>
+                            <th>Product Description</th>
                             <th>Price Per Unit</th>
                             <th>Add to Store</th>
                         </tr>
                         
-        <%
-            try{
-            connection = DriverManager.getConnection(connectionUrl+dbName, userID, password);
-            statement=connection.createStatement();
-            String sql = "SELECT * FROM product";
-            
-            resultSet = statement.executeQuery(sql);
-            while(resultSet.next()){
-        %>
+                        <%
+                            try{
+                            connection = DriverManager.getConnection(connectionUrl+dbName, userID, password);
+                            statement=connection.createStatement();
+                            String sql = "SELECT * FROM productVendor";
+
+                            resultSet = statement.executeQuery(sql);
+                            int i = 0;
+                            while(resultSet.next()){
+                        %>
                         <tr>
                             <td><center><img src="<%=resultSet.getString("picture") %>" alt="" style="width:200px; height:150px;"></center></td>
                             <td><center><%=resultSet.getString("name") %></center></td>
-                            <td><center>$<%=resultSet.getString("price") %></center></td>
-                            <td><center>New Price: <input type="text" name="NewPrice" value="$ Change Price"><button class="Price_Button">Confirm</button></center></td>
-                            <td><center><%=resultSet.getString("amountInStock")%></center></td>
-                            <td><center><form name="add" method="post" action="add.jsp"><input type="checkbox" name="check<%= resultSet.getString("productID")%>" value=<%= resultSet.getString("productID") %>><input type="submit" class="Remove_Button" value="Add"></center></td>
+                            <td><center><%=resultSet.getString("description") %></center></td>
+                            <td><center>$<%=resultSet.getString("vendorPrice") %></center></td>
+                            <td><center><form name="add" method="post" action="add.jsp"><button type="submit" name="button" class="Remove_Button" value=<%=resultSet.getString("productID")%>>Add</button></form></center></td>
                         </tr>
                         <%
-                            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            //branch test 2
-        }
+                            i++;
+                        }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            //branch test 2
+                        }
                         %>
                     </table>
                 </div>
