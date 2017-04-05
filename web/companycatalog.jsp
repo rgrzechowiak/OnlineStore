@@ -107,7 +107,7 @@
             <div class="head">
                 <h1><center>Company Product Catalog</center></h1>
                 <div class="return">
-                    <button class="button">Admin Management</button>
+                    <form name="redirect" method="post" action="redirect.jsp"><button type="submit" name="redirect" class="button" value="home">Admin Management</button></form>
                 </div>
             </div>
                 <div class="Table-List">

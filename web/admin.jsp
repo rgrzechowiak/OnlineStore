@@ -121,8 +121,7 @@
         <div class="Page-Header">
             <h1><center>Admin Management</center></h1>
             <div class="update">
-                <button class="button1">Update Stock and Price Information</button>
-                <button class="button2">Company Product Catalog</button>
+                <form name="redirect" method="post" action="redirect.jsp"><button type="submit" name="redirect" class="button2" value="catalog">Company Product Catalog</button></form>
             </div>
         </div>
         <div class="Table-List">
@@ -150,7 +149,7 @@
                  <td><center><img src="<%=resultSet.getString("picture") %>" alt="" style="width:200px; height:150px;"></center></td>
                  <td><center><%=resultSet.getString("name") %></center></td>
                  <td><center>$<%=resultSet.getString("price") %></center></td>
-        <td><center>New Price:<form name="price" method="post" action="price.jsp"><input type="text" name="newPrice" value="$ Change Price"><button type="submit" name="priceSub" class="Price_Button" value=<%=resultSet.getString("productID")%>>Confirm</button></center></td>
+                 <td><center>New Price:<form name="price" method="post" action="price.jsp"><input type="text" name="newPrice" value="$ Change Price"><button type="submit" name="priceSub" class="Price_Button" value=<%=resultSet.getString("productID")%>>Confirm</button></form></center></td>
                  <td><center><%=resultSet.getString("amountInStock")%></center></td>
                  <td><center><form name="removal" method="post" action="delete.jsp"><button type="submit" name="button" class="Remove_Button" value=<%=resultSet.getString("productID")%>>Remove</button></form></center></td>
              </tr>
