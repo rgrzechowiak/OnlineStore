@@ -38,7 +38,7 @@
             .update {
                 margin: 0 auto;
                 position: absolute;
-                top: 9%;
+                top: 53px;
                 left: 50%;
                 margin-right: -50%;
                 transform: translate(-50%, -50%)
