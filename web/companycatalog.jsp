@@ -5,6 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.io.*, java.util.*, java.sql.*"%>
+<%@page import="javax.servlet.http.*, javax.servlet.*"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,10 +38,32 @@
             .return{
                 margin: 0 auto;
                 position: absolute;
-                top: 21%;
+                top: 53px;
                 left: 50%;
                 margin-right: -50%;
                 transform: translate(-50%, -50%)
+            }
+            
+            .Price_Button {
+                background-color: greenyellow;
+                margin: 0 auto;
+                margin-bottom: 10px;
+                border: none;
+                border-radius: 8px;
+                color: darkviolet;
+                text-align: center;
+                text-decoration: none;
+            }
+            
+            .Remove_Button {
+                background-color: greenyellow;
+                margin: 0 auto;
+                margin-bottom: 10px;
+                border: none;
+                border-radius: 8px;
+                color: darkviolet;
+                text-align: center;
+                text-decoration: none; 
             }
             
             .button {
@@ -49,16 +75,39 @@
                 color: darkviolet;
                 text-align: center;
                 text-decoration: none;
+                
+                
             }
         </style>
         <title>JSP Page</title>
     </head>
     <body>
+    <%
+        String driverName = "com.mysql.jdbc.Driver";
+        String connectionUrl = "jdbc:mysql://localhost:3306/";
+        String dbName = "test";
+        String userID = "root";
+        String password = "";
+        
+        try{
+            Class.forName(driverName);
+        }
+        catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        
+
+    %>    
+    
         <div class="catmain">
             <div class="head">
                 <h1><center>Company Product Catalog</center></h1>
                 <div class="return">
-                    <button class="button">Admin Management</button>
+                    <form name="redirect" method="post" action="redirect.jsp"><button type="submit" name="redirect" class="button" value="home">Admin Management</button></form>
                 </div>
             </div>
                 <div class="Table-List">
@@ -66,17 +115,36 @@
                         <tr>
                             <th>Product Image</th>
                             <th>Product Name</th>
-                            <th>Release Date</th>
+                            <th>Product Description</th>
                             <th>Price Per Unit</th>
                             <th>Add to Store</th>
                         </tr>
+                        
+                        <%
+                            try{
+                            connection = DriverManager.getConnection(connectionUrl+dbName, userID, password);
+                            statement=connection.createStatement();
+                            String sql = "SELECT * FROM productVendor";
+
+                            resultSet = statement.executeQuery(sql);
+                            int i = 0;
+                            while(resultSet.next()){
+                        %>
                         <tr>
-                            <td><center><img src="images/xboxone.jpg" alt="Xbox One" style="width:200px; height:150px;"></center></td>
-                            <td><center>Xbox One</center></td>
-                            <td><center>8/10/2016</center></td>
-                            <td><center>$499.99</center></td>
-                            <td><center><button class="button">Add</button></center></td>
+                            <td><center><img src="<%=resultSet.getString("picture") %>" alt="" style="width:200px; height:150px;"></center></td>
+                            <td><center><%=resultSet.getString("name") %></center></td>
+                            <td><center><%=resultSet.getString("description") %></center></td>
+                            <td><center>$<%=resultSet.getString("vendorPrice") %></center></td>
+                            <td><center><form name="add" method="post" action="add.jsp"><button type="submit" name="button" class="Remove_Button" value=<%=resultSet.getString("productID")%>>Add</button></form></center></td>
                         </tr>
+                        <%
+                            i++;
+                        }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            //branch test 2
+                        }
+                        %>
                     </table>
                 </div>
         </div>
