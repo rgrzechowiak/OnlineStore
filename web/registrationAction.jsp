@@ -4,7 +4,7 @@
     Author     : malphons
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%> 
+<%@page contentType="text/html" pageEncoding="UTF-8" import="myBean.DBConnect"%> 
 <!DOCTYPE html>
 <html>
   <head>
@@ -12,18 +12,18 @@
     <title>JSP Page</title>
   </head>
   <body>
+      <%@include file = "header.jsp" %>
     <%
-      String name = request.getParameter("name");
       String username = request.getParameter("username");
       String password = request.getParameter("password");
       String email = request.getParameter("email");
-      String state = request.getParameter("state");
-      String sql = "insert into customer values (0,'" + name + "', '" + email + "','" + username + "', '"
-              + password + "', '" + state + "')";
-      out.println(sql+"<br>");
+      String sql = "insert into accounts values (0, '" + username + "','" + email + "', '"
+              + password + "', 2)";
+      DBConnect dbConnect = new DBConnect();
+      out.println(dbConnect.updateDB(sql));
+      
     %>
-    <h2>
-        Thank you <%= name %>. An email has been sent to <%= email %>.
-    </h2>
+    <h3>
+    </h3>
   </body>
 </html>

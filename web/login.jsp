@@ -4,8 +4,10 @@
     Author     : malphons
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*" %>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,6 +16,7 @@
   </head>
   <body>
     <%
+
       String driverName = "com.mysql.jdbc.Driver";
       String connectionUrl = "jdbc:mysql://localhost:3306/";
       String dbName = "test";
@@ -54,25 +57,7 @@
       catch(SQLException e){
           
       }
-      
-      
-      /*String sql = "select name, status from accounts where username = ?"
-              + " and password = ?";*/
-      //DBConnect dbConnect = new DBConnect();
-      //String result = dbConnect.queryDB(sql, user, pwd);
-      
-      
-    /*  if (user.length() == 0) {
-        response.sendRedirect("index.jsp");
-        return;
-      }
-      if(pwd.length() ==0) {
-        response.sendRedirect("index.jsp");
-      }
-      else{
-          response.sendRedirect("user.jsp");
-          
-      }*/
+
     %>
   </body>
 </html>

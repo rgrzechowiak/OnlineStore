@@ -19,7 +19,7 @@
     <body>
         <%--Dropdown Menu--%>
         <ul class="w3-navbar w3-light-grey w3-border">
-             <li><a href="index.jsp">Home</a></li>
+             <li><a href="user.jsp">Home</a></li>
              <li class="w3-dropdown-hover">
                 <a href="#">Computers <i class="fa fa-caret-down"></i></a>
                 <div class="w3-dropdown-content w3-white w3-card-4">
@@ -27,7 +27,8 @@
                     <a href="#">PC accessories</a>
                     <a href="#">Laptops</a>
                 </div>
-             <li><a href="shop.jsp">Games</a></li>
+             <li><a href="games.jsp">Games</a></li>
+
              <li><a href="#">Smart phones</a></li>
         <%--Search bar--%>
         <%--<li><input type="text" class="w3-input" placeholder="Search.."></li>
