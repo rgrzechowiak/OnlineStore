@@ -94,12 +94,12 @@
                 border-radius: 4px;
                 box-sizing: border-box;
             }
+           
             
         </style>
         <title>Your Online Shop</title>
     </head>
     <body>
-        <%@include file = "header.jsp" %>
         <%
         String id = request.getParameter("productID");
         String driverName = "com.mysql.jdbc.Driver";
@@ -118,6 +118,7 @@
         Statement statement = null;
         ResultSet resultSet = null;
         %>
+        <%@include file = "header.jsp" %>
         <div class="main">
         <div class="Page-Header">
             <h1><center>Shopping</center></h1>
@@ -144,7 +145,7 @@
             while(resultSet.next()){
         %>
              <tr>
-                 <td><center><img src="<%=resultSet.getString("picture") %>" alt="" style="width:200px; height:150px;"></center></td>
+                 <td><center><img src="<%=resultSet.getString("picture") %>" alt="" style="width:200px; height:150px; margin-bottom:1px; margin-top:1px;"></center></td>
                  <td><center><%=resultSet.getString("name") %></center></td>
                  <td><center>$<%=resultSet.getString("price") %></center></td>
                  <td><center><%=resultSet.getString("description")%></center></td>
@@ -160,6 +161,7 @@
             //branch test 2
         }
         %>
+        
         </table>
         </div>
         </div>
