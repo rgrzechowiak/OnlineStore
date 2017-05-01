@@ -4,8 +4,10 @@
     Author     : malphons
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"
-        import="myBean.DBConnect"%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.sql.*" %>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,23 +16,48 @@
   </head>
   <body>
     <%
-      String user = request.getParameter("username");
+
+      String driverName = "com.mysql.jdbc.Driver";
+      String connectionUrl = "jdbc:mysql://localhost:3306/";
+      String dbName = "test";
+      String userID = "root";
+      String password = "";
+      
+      String acctType = "";
+      String user = "";
       String pwd = request.getParameter("password");
-      String sql = "select name, status from accounts where username = ?"
-              + " and password = ?";
-      DBConnect dbConnect = new DBConnect();
-      String result = dbConnect.queryDB(sql, user, pwd);
-      if (user.length() == 0) {
-        response.sendRedirect("index.jsp");
-        return;
-      }
-      if(pwd.length() ==0) {
-        response.sendRedirect("index.jsp");
-      }
-      else{
-          response.sendRedirect("user.jsp");
+      try{
+        Connection connect = null;
+        Class.forName(driverName);
+        connect = DriverManager.getConnection(connectionUrl+dbName, userID, password);
+    
+        ResultSet resultSet = null;
+        Statement statement = null;
+        statement = connect.createStatement();
+        
+        user = request.getParameter("username");
+        
+        String sql = "SELECT * FROM accounts WHERE username='"+user+"'";
+        resultSet = statement.executeQuery(sql);
+        
+            while(resultSet.next()){
+              acctType = resultSet.getString("typeOfAccount");
+            }
+            
+            if(acctType.equals("1"))
+            {
+                response.sendRedirect("admin.jsp");
+            }
+            else if(acctType.equals("2"))
+            {
+                response.sendRedirect("user.jsp");
+            }
+            else response.sendRedirect("index.jsp");
+        }
+      catch(SQLException e){
           
       }
+
     %>
   </body>
 </html>

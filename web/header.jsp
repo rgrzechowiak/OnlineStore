@@ -27,7 +27,8 @@
                     <a href="#">PC accessories</a>
                     <a href="#">Laptops</a>
                 </div>
-             <li><a href="games.jsp">Games</a></li>
+             <li><a href="shop.jsp">Games</a></li>
+
              <li><a href="#">Smart phones</a></li>
         <%--Search bar--%>
         <%--<li><input type="text" class="w3-input" placeholder="Search.."></li>
@@ -39,18 +40,6 @@
             <img src="images/banner-shop11.jpg" alt="Person">
             
         </div>
-    <%--<div class="w3-container w3-teal">
-        <h2>Log on</h2>
-    </div>
 
-    <form class="w3-container">
-        <label class="w3-label w3-text-teal"><b>Username</b></label>
-        <input class="w3-input w3-border w3-light-grey" type="text">
-
-        <label class="w3-label w3-text-teal"><b>Password</b></label>
-        <input class="w3-input w3-border w3-light-grey" type="text">
-
-        <button class="w3-btn w3-blue-grey">Sign in</button>
-    </form>--%>
     </body>
 </html>
