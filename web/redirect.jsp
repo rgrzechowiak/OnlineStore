@@ -17,4 +17,8 @@
     else if(current.equals("catalog")){
         response.sendRedirect("companycatalog.jsp");
     }
+    else if(current.equals("log"))
+    {
+        response.sendRedirect("index.jsp");
+    }
 %>

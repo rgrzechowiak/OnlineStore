@@ -1,7 +1,7 @@
 <%-- 
-    Document   : admin
-    Created on : Feb 6, 2017, 7:35:30 PM
-    Author     : Robert
+    Document   : shop
+    Created on : Apr 19, 2017, 7:16:10 PM
+    Author     : rgrzecho
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -96,9 +96,10 @@
             }
             
         </style>
-        <title>Admin Management</title>
+        <title>Your Online Shop</title>
     </head>
     <body>
+        <%@include file = "header.jsp" %>
         <%
         String id = request.getParameter("productID");
         String driverName = "com.mysql.jdbc.Driver";
@@ -119,10 +120,7 @@
         %>
         <div class="main">
         <div class="Page-Header">
-            <h1><center>Admin Management</center></h1>
-            <div class="update">
-                <form name="redirect" method="post" action="redirect.jsp"><button type="submit" name="redirect" class="button1" value="catalog">Company Product Catalog</button><button type="sumbit" name="redirect" class="button2" value="log">Logout</button></form>
-            </div>
+            <h1><center>Shopping</center></h1>
         </div>
         <div class="Table-List">
         <table style="width:100%">
@@ -130,7 +128,7 @@
                  <th>Product Image</th>
                  <th>Product Name</th>
                  <th>Current Price</th>
-                 <th>Change Price</th>
+                 <th>Product Description</th>
                  <th>Current Amount in Stock</th>
                  <th>Remove</th>
              </tr>
@@ -149,9 +147,9 @@
                  <td><center><img src="<%=resultSet.getString("picture") %>" alt="" style="width:200px; height:150px;"></center></td>
                  <td><center><%=resultSet.getString("name") %></center></td>
                  <td><center>$<%=resultSet.getString("price") %></center></td>
-                 <td><center>New Price:<form name="price" method="post" action="price.jsp"><input type="text" name="newPrice" value="$ Change Price"><button type="submit" name="priceSub" class="Price_Button" value=<%=resultSet.getString("productID")%>>Confirm</button></form></center></td>
+                 <td><center><%=resultSet.getString("description")%></center></td>
                  <td><center><%=resultSet.getString("amountInStock")%></center></td>
-                 <td><center><form name="removal" method="post" action="delete.jsp"><button type="submit" name="button" class="Remove_Button" value=<%=resultSet.getString("productID")%>>Remove</button></form></center></td>
+                 <td><center><form name="buy" method="post" action=""><button type="submit" name="button" class="Remove_Button" value=<%=resultSet.getString("productID")%>>Buy</button></form></center></td>
              </tr>
         <%
             i++;
