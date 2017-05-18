@@ -8,7 +8,6 @@
 <!DOCTYPE html>
 
 <%
-
         String driverName = "com.mysql.jdbc.Driver";
         String connectionUrl = "jdbc:mysql://localhost:3306/";
         String dbName = "test";
@@ -55,8 +54,5 @@ try{
 catch(SQLException e){
     
 }
-
 response.sendRedirect("companycatalog.jsp");
-
-
 %>
